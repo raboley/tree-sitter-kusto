@@ -1,0 +1,20 @@
+// Complex KQL query with joins and aggregations
+let RecentUsers = UserProfiles
+| where CreatedDate > ago(30d)
+| project UserId, Email, Department;
+
+RecentUsers
+| join kind=inner (
+    OrderDetails
+    | summarize OrderCount = count(), TotalValue = sum(Value) by UserId
+    | where OrderCount > 5
+    ) on UserId
+| extend EmailDomain = extract(@"@(.+)", 1, Email)
+| summarize 
+    UserCount = count(),
+    AvgOrders = avg(OrderCount),
+    TotalRevenue = sum(TotalValue)
+    by Department, EmailDomain
+| where UserCount > 10
+| order by TotalRevenue desc
+| take 50

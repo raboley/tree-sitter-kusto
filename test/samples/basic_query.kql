@@ -1,0 +1,5 @@
+// Basic KQL query for testing syntax highlighting
+UserProfiles
+| where CreatedDate > ago(7d)
+| project UserId, Email
+| take 100
