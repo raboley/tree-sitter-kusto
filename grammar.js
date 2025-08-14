@@ -4,7 +4,10 @@ module.exports = grammar({
   extras: ($) => [/\s/, $.comment],
   rules: {
     source_file: ($) =>
-      repeat1($._statement),
+      choice(
+        $._statement,
+        seq($._statement, repeat1($._statement))
+      ),
     _statement: ($) => choice($.let_statement, $.management_command, $._tabular_or_sub_tabular),
 
     let_statement: ($) =>

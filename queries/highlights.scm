@@ -34,14 +34,19 @@
 [
   (binary_operator)
   (compound_keywords)
-  (operator)
   (range_operator)
   (join_operator)
   (sub_operator)
-  (to_operator)
   (mv_apply_operator)
   (sort_keyword)
 ] @keyword.operator
+
+; Specific to_operator highlighting only in valid contexts
+(range_operation (to_operator) @keyword.operator)
+(mv_apply_operator (to_operator) @keyword.operator)
+
+; Specific operator highlighting - make take and project same as create
+(operation (pipe) (operator) @keyword)
 (string) @string
 (number) @number
 (bool) @boolean
