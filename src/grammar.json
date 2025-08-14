@@ -597,6 +597,10 @@
         {
           "type": "STRING",
           "value": "sort"
+        },
+        {
+          "type": "STRING",
+          "value": "take"
         }
       ]
     },

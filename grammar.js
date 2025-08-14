@@ -106,6 +106,7 @@ module.exports = grammar({
         "mv-expand",
         "bag_unpack",
         "sort",
+        "take",
       ),
     sub_operator: ($) => choice("by", "on"),
     to_operator: ($) => "to",
