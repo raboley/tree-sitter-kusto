@@ -1,0 +1,13 @@
+// Test various syntax patterns for validation
+.create table Test (id: int)
+
+// Basic query with take
+Test | take 5
+
+// mv-apply with to operator  
+Test | mv-apply item = items to typeof(string) on (
+    where item contains "test"
+)
+
+// Invalid syntax that shouldn't highlight 'to' incorrectly
+Test | invalid_operator unknown_syntax

@@ -43,7 +43,7 @@
 
 ; Specific to_operator highlighting only in valid contexts
 (range_operation (to_operator) @keyword.operator)
-(_mv_apply_operation (to_operator) @keyword.operator)
+(operation (mv_apply_operator) (to_operator) @keyword.operator)
 
 ; Specific operator highlighting - make take and project same as create
 (operation (pipe) (operator) @keyword)
