@@ -8,7 +8,7 @@ module.exports = grammar({
         seq($._statement, optional($._delimiter)),
         seq($._statement, repeat1(seq($._delimiter, $._statement))),
       ),
-    _statement: ($) => choice($.let_statement, $._tabular_or_sub_tabular),
+    _statement: ($) => choice($.let_statement, $.management_command, $._tabular_or_sub_tabular),
 
     let_statement: ($) =>
       seq($.let_keyword, $.identifier, "=", $._tabular_or_expression),
@@ -230,5 +230,51 @@ module.exports = grammar({
       prec(1, seq($.datatable_function, $._function_params, $.array)),
     datatable_function: ($) => "datatable",
     key_value_pair: ($) => seq($._expression, ":", $._expression),
+    
+    // Management commands (admin commands) - start with dot (.)
+    // Performance: Using choice() with specific command recognition for O(1) lookup
+    management_command: ($) => seq(
+      ".",
+      choice(
+        $.create_table_command,
+        $.alter_table_command,
+        $.drop_table_command
+      )
+    ),
+
+    // Admin command implementations - optimized for common patterns
+    // Performance: Column definitions use repeat() for efficient parsing of variable-length lists
+    create_table_command: ($) => seq(
+      "create", "table", $.identifier, 
+      "(", 
+      optional(seq($.column_definition, repeat(seq(",", $.column_definition)))),
+      ")",
+      optional(seq("with", "(", $.property_list, ")"))
+    ),
+
+    alter_table_command: ($) => choice(
+      seq("alter", "table", $.identifier, 
+          "(", 
+          optional(seq($.column_definition, repeat(seq(",", $.column_definition)))),
+          ")",
+          optional(seq("with", "(", $.property_list, ")"))),
+      seq("alter-merge", "table", $.identifier, 
+          "(", 
+          optional(seq($.column_definition, repeat(seq(",", $.column_definition)))),
+          ")",
+          optional(seq("with", "(", $.property_list, ")")))
+    ),
+
+    drop_table_command: ($) => choice(
+      seq("drop", "table", $.identifier, optional("ifexists")),
+      seq("drop", "tables", "(", 
+          seq($.identifier, repeat(seq(",", $.identifier))), 
+          ")", 
+          optional("ifexists"))
+    ),
+
+    column_definition: ($) => seq($.identifier, ":", $.type),
+    property_list: ($) => seq($.property_pair, repeat(seq(",", $.property_pair))),
+    property_pair: ($) => seq($.identifier, "=", choice($.string, $.identifier, $.number)),
   },
 });

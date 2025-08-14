@@ -1,5 +1,28 @@
 [
   {
+    "type": "alter_table_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_definition",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "property_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "array",
     "named": true,
     "fields": {},
@@ -374,6 +397,25 @@
     "fields": {}
   },
   {
+    "type": "column_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -475,6 +517,29 @@
     "fields": {}
   },
   {
+    "type": "create_table_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "column_definition",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "property_list",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "datatable",
     "named": true,
     "fields": {},
@@ -492,6 +557,21 @@
         },
         {
           "type": "typed_parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "drop_table_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
           "named": true
         }
       ]
@@ -998,6 +1078,29 @@
     }
   },
   {
+    "type": "management_command",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "alter_table_command",
+          "named": true
+        },
+        {
+          "type": "create_table_command",
+          "named": true
+        },
+        {
+          "type": "drop_table_command",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "mv_apply_operator",
     "named": true,
     "fields": {}
@@ -1336,6 +1439,44 @@
     }
   },
   {
+    "type": "property_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "property_pair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "property_pair",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "range_operation",
     "named": true,
     "fields": {},
@@ -1557,6 +1698,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -1564,6 +1706,10 @@
       "types": [
         {
           "type": "let_statement",
+          "named": true
+        },
+        {
+          "type": "management_command",
           "named": true
         },
         {
@@ -1816,6 +1962,10 @@
     "named": false
   },
   {
+    "type": ";",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
@@ -1845,6 +1995,14 @@
   },
   {
     "type": "]",
+    "named": false
+  },
+  {
+    "type": "alter",
+    "named": false
+  },
+  {
+    "type": "alter-merge",
     "named": false
   },
   {
@@ -1884,6 +2042,10 @@
     "named": false
   },
   {
+    "type": "create",
+    "named": false
+  },
+  {
     "type": "d",
     "named": false
   },
@@ -1905,6 +2067,10 @@
   },
   {
     "type": "distinct",
+    "named": false
+  },
+  {
+    "type": "drop",
     "named": false
   },
   {
@@ -1946,6 +2112,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "ifexists",
+    "named": false
   },
   {
     "type": "in",
@@ -2096,6 +2266,14 @@
     "named": false
   },
   {
+    "type": "table",
+    "named": false
+  },
+  {
+    "type": "tables",
+    "named": false
+  },
+  {
     "type": "timespan",
     "named": false
   },
@@ -2125,6 +2303,10 @@
   },
   {
     "type": "where",
+    "named": false
+  },
+  {
+    "type": "with",
     "named": false
   },
   {

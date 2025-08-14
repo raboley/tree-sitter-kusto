@@ -1,0 +1,117 @@
+===============================================
+Create Table Command - Basic
+===============================================
+
+.create table UserProfiles (
+    UserId: int,
+    Name: string,
+    Email: string
+)
+
+---
+
+(source_file
+  (management_command
+    (create_table_command
+      (identifier)
+      (column_definition (identifier) (type))
+      (column_definition (identifier) (type))
+      (column_definition (identifier) (type)))))
+
+===============================================
+Create Table Command - With Properties
+===============================================
+
+.create table Users (
+    Id: int,
+    Name: string
+) with (docstring="User information", folder="UserData")
+
+---
+
+(source_file
+  (management_command
+    (create_table_command
+      (identifier)
+      (column_definition (identifier) (type))
+      (column_definition (identifier) (type))
+      (property_list
+        (property_pair (identifier) (string))
+        (property_pair (identifier) (string))))))
+
+===============================================
+Drop Table Command - Single Table
+===============================================
+
+.drop table UserProfiles
+
+---
+
+(source_file
+  (management_command
+    (drop_table_command
+      (identifier))))
+
+===============================================
+Drop Table Command - Single Table with ifexists
+===============================================
+
+.drop table UserProfiles ifexists
+
+---
+
+(source_file
+  (management_command
+    (drop_table_command
+      (identifier))))
+
+===============================================
+Drop Tables Command - Multiple Tables
+===============================================
+
+.drop tables (Table1, Table2, Table3)
+
+---
+
+(source_file
+  (management_command
+    (drop_table_command
+      (identifier)
+      (identifier)
+      (identifier))))
+
+===============================================
+Alter Table Command - Basic
+===============================================
+
+.alter table UserProfiles (
+    UserId: int,
+    Name: string,
+    NewColumn: datetime
+)
+
+---
+
+(source_file
+  (management_command
+    (alter_table_command
+      (identifier)
+      (column_definition (identifier) (type))
+      (column_definition (identifier) (type))
+      (column_definition (identifier) (type)))))
+
+===============================================
+Alter-Merge Table Command
+===============================================
+
+.alter-merge table UserProfiles (
+    NewColumn: string
+)
+
+---
+
+(source_file
+  (management_command
+    (alter_table_command
+      (identifier)
+      (column_definition (identifier) (type)))))
