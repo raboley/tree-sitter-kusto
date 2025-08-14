@@ -4,10 +4,7 @@ module.exports = grammar({
   extras: ($) => [/\s/, $.comment],
   rules: {
     source_file: ($) =>
-      choice(
-        seq($._statement, optional($._delimiter)),
-        seq($._statement, repeat1(seq($._delimiter, $._statement))),
-      ),
+      repeat1($._statement),
     _statement: ($) => choice($.let_statement, $.management_command, $._tabular_or_sub_tabular),
 
     let_statement: ($) =>
@@ -90,7 +87,6 @@ module.exports = grammar({
     _apply_sub_operation: ($) =>
       seq("(", $._operation_details, repeat($.operation), ")"),
     pipe: ($) => /[|]/,
-    _delimiter: ($) => ";",
     mv_apply_operator: ($) => choice("mv-apply"),
     operator: ($) =>
       choice(
@@ -203,7 +199,7 @@ module.exports = grammar({
     timespan: ($) =>
       seq($.number, choice("d", "h", "m", "s", "ms", "us", "ns")),
     identifier: ($) => /\$?[a-zA-Z_][a-zA-Z0-9_]*/,
-    property_identifier: ($) => seq($._expression, seq(".", $.identifier)),
+    property_identifier: ($) => prec.left(2, seq($._expression, seq(".", $.identifier))),
     property_index: ($) => seq($._expression, "[", $._expression, "]"),
     dynamic_list: ($) => seq("(", $._expressions, ")"),
     array: ($) => seq("[", $._expressions, "]"),

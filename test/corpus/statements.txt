@@ -2,7 +2,7 @@
 Table query
 ==================
 
-AzureDiagnostics;
+AzureDiagnostics
 
 ---
 
@@ -60,7 +60,7 @@ AzureDiagnostics
 let statement
 ==================
 
-let expect_pipelines = AzureDiagnostics;
+let expect_pipelines = AzureDiagnostics
 expect_pipelines
 
 ---
@@ -81,7 +81,7 @@ expect_pipelines
 let dynamic
 ==================
 
-let Status = dynamic([ 'Failed', 'TimedOut']);
+let Status = dynamic([ 'Failed', 'TimedOut'])
 AzureDiagnostics
 
 ---
@@ -103,7 +103,7 @@ AzureDiagnostics
 let datatable
 ==================
 
-let tabular = datatable(var1: string, var2: int)['x', 1, 'y', 2];
+let tabular = datatable(var1: string, var2: int)['x', 1, 'y', 2]
 tabular
 
 ---
@@ -244,7 +244,7 @@ let parse_result = (resultCode: int) {
     resultCode == -2, 4h/1ms,
     strcat('Unknown resultcode: ', resultCode)
   )
-};
+}
 
 ---
 
@@ -280,7 +280,7 @@ extend assign binary
 AzureDiagnostics
 | extend
   running_duration = now(),
-  max_duration_before_timeout=4h/1ms;
+  max_duration_before_timeout=4h/1ms
 
 ---
 
@@ -312,7 +312,7 @@ AzureDiagnostics
 | mv-apply c1_trace = c1_drilldown.c1_traces to typeof(dynamic) on (
     where func().message contains 'data'
     | project var
-);
+)
 
 ---
 
