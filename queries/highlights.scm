@@ -72,30 +72,25 @@
 ; Create table command highlighting
 (create_table_command
   "create" @keyword
-  "table" @keyword.control
-  (identifier) @type)
+  "table" @keyword.control)
 
 ; Alter table command highlighting  
 (alter_table_command
   "alter" @keyword
-  "table" @keyword.control
-  (identifier) @type)
+  "table" @keyword.control)
 
 (alter_table_command
   "alter-merge" @keyword
-  "table" @keyword.control
-  (identifier) @type)
+  "table" @keyword.control)
 
 ; Drop table command highlighting
 (drop_table_command
   "drop" @keyword
-  "table" @keyword.control
-  (identifier) @type)
+  "table" @keyword.control)
 
 (drop_table_command
   "drop" @keyword
-  "tables" @keyword.control
-  (identifier) @type)
+  "tables" @keyword.control)
 
 (drop_table_command "ifexists" @keyword.modifier)
 
